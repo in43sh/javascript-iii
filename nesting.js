@@ -59,11 +59,16 @@ function employeeUpdater() {
 
 var workplaceAccidents = [12, 56, 44, 3, 29, 56, 56, 3, 7, 12];
 
-// function removeDuplicates () {
-//   for (var i = 0; i < workplaceAccidents.length; i++) {
-
-//   }
-// }
+function removeDuplicates () {
+  for (var i = workplaceAccidents.length; i >= 0; i--) {
+    for (var j = i - 1; j >= 0; j--) {
+      if (workplaceAccidents[i] === workplaceAccidents[j]) {
+        workplaceAccidents.splice(i, 1)
+      }
+    }
+  }
+  return workplaceAccidents
+}
 
 
 // === PROBLEM 3 ==========

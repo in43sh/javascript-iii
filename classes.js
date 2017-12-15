@@ -108,18 +108,13 @@ class ProgressiveManager {
 
     hire(employee) {
         this.reports.push(employee)
-
-        if (reports.length >= 1 && reports.length < 4) {
-            this.title = 'Barely Manager'
-        } else if (reports.length >= 4 && reports.length < 11) {
-            this.title = 'Mostly Manager'
-        } else if (reports.length >= 11 && reports.length < 51) {
-            this.title = 'Manager'
-        } else if (reports.length >= 51 && reports.length < 101) {
-            this.title = 'Manager Plus'
-        } else if (reports.length >= 101) {
-            this.title = 'Bestest Manager'
-        }
+        let len = this.reports.length
+        if(len > 100) this.title = 'Bestest Manager'
+        else if(len > 50) this.title = 'Manager Plus'
+        else if(len > 10) this.title = 'Manager'
+        else if(len > 3) this.title = 'Mostly Manager'
+        else if(len > 0) this.title = 'Barely Manager'
+        else this.title = 'Not a manager'
     }
 
     fire(index) {
@@ -154,27 +149,22 @@ It can :
 */
 
 class Machine {
-    constructor () {
+    constructor() {
         this.widgets_made_count = 0
         this.wear_and_tear_count = 0
         this.needs_reboot = false
     }
-
-    makeWidgets (number) {
-        this.widgets_made_count += number
-        this.wear_and_tear_count += number % 50
+    makeWidgets(num){
+        this.widgets_made_count += num
+        this.wear_and_tear_count += num / 50
     }
-
-    fixMachine () {
+    fixMachine() {
         this.needs_reboot = true
     }
-
-    reboot () {
-        return rebootComplete()
-    }
-
-    rebootComplete () {
-        this.wear_and_tear_count -= 10
-        this.needs_reboot = false
+    reboot() {
+        return () => {   // ARROW FUNCTION SO YOU CAN PULL THIS CONTEXT FROM PARENT 
+            this.wear_and_tear_count -= 10
+            this.needs_reboot = false
+        }
     }
 }
